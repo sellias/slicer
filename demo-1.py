@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------
-#   demonstrate loading and visualizing polygons using matploblib
+#   demonstrate plotting polygons using matploblib
 #   
 #   (C) 2021 Stephen Ellias, New York, USA
 #   Released under GNU Public License (GPL)
@@ -12,12 +12,12 @@ import mpl_toolkits.mplot3d as a3
 def main():
     plot_init()
     plot_demo_one()
-    plot_show_rotating()
+    plot_show_still()
 
 def plot_init():
     """prepare figure, 3D axes, size, range, viewing distance, labels"""
     global fig, ax, plot_view_dist
-    fig = plt.figure(figsize=(12,12))
+    fig = plt.figure(figsize=(6,6))
     ax = fig.add_subplot(111, projection='3d')
     plot_view_dist = 9
     ax.set_xlim([0,5])
