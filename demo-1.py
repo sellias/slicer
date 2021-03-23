@@ -1,10 +1,12 @@
 # ----------------------------------------------------------------
-#   demonstrate plotting polygons using matploblib
+#   demo 1
+#       > plot ploygons, lines, labels
 #   
-#   (C) 2021 Stephen Ellias, New York, USA
-#   Released under GNU Public License (GPL)
-#   Refer to github.com/sellias
+#   (c) 2021 stephen ellias, new york, usa
+#   released under gnu public license (gpl)
+#   refer to github.com/sellias
 # ----------------------------------------------------------------
+
 import numpy as np
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d as a3
