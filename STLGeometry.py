@@ -44,16 +44,13 @@ class STLGeometry:
         try:
             self.mesh = mesh.Mesh.from_file(stl_filepath)
         except FileNotFoundError:
-            # TODO check if this works
-            raise RuntimeError("file not found: ,",stl_filepath)
+            # raise RuntimeError("file not found: ,",stl_filepath)
+            print("file not found: ,",stl_filepath) 
         
         self.derive_statistics()
 
     def derive_statistics(self):
         # TODO finish all stats
-        """major stats"""
-        self.faces = self.mesh.vectors.size
-        self.dimensions = [self.x_max-self.x_min, self.y_max-self.y_min, self.z_max-self.z_min]
         """boundaries"""
         self.x_max = np.max(self.mesh.vectors[:,:,0])
         self.x_min = np.min(self.mesh.vectors[:,:,0])
@@ -61,12 +58,24 @@ class STLGeometry:
         self.y_min = np.min(self.mesh.vectors[:,:,1])
         self.z_max = np.max(self.mesh.vectors[:,:,2])
         self.z_min = np.min(self.mesh.vectors[:,:,2])
+        """major stats"""
+        self.faces = self.mesh.vectors.size
+        self.dimensions = [
+            self.x_max-self.x_min,
+            self.y_max-self.y_min,
+            self.z_max-self.z_min
+            ]
+        self.range = [
+            self.x_min, self.x_max,
+            self.y_min, self.y_max,
+            self.z_min, self.z_max,
+        ]
 
     def print_stats(self):
         """size, triangle count, file name, range"""
         print(f'Geometry Statistics:')
         print(f'\tSize:   \t {self.dimensions[0]:.0f}mm x {self.dimensions[1]:.0f}mm x {self.dimensions[2]:.0f}mm')
-        print(f'\tFace Count:\t {self.faces:,}')
+        print(f'\tFaces:  \t {self.faces:,}')
         print(f'\tX Range:\t {self.x_min:.3f}, {self.x_max:.3f}')
         print(f'\tY Range:\t {self.y_min:.3f}, {self.y_max:.3f}')
         print(f'\tZ Range:\t {self.z_min:.3f}, {self.z_max:.3f}')
