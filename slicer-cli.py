@@ -17,19 +17,23 @@
 # ----------------------------------------------------------------
 
 import sys, os
-from STLGeometry import STLGeometry
+from STLGeometry import STLGeometry as STL
 
-"""validate input arguments"""
-if len(sys.argv) != 2:
-    # raise RuntimeError('please provide target filename')
-    print('ERROR: please provide target filename')
-    exit()
+def main():
+    """validate input arguments"""
+    if len(sys.argv) != 2:
+        print('ERROR: please provide target filename')
+        exit()
+    if not os.path.exists(sys.argv[1]):
+        print('ERROR: file not found')
+        exit()
 
-if not os.path.exists(sys.argv[1]):
-    # raise RuntimeError('file not found')
-    print('ERROR: file not found')
-    exit()
+    """import the stl geometry"""
+    print('Importing \'', sys.argv[1], '\'')
+    obj = STL(sys.argv[1])
 
-"""import the stl geometry"""
-print('Importing \'', sys.argv[1], '\'')
-obj = STLGeometry(sys.argv[1])
+    """print geometry statistics"""
+    obj.print_stats()
+
+if __name__ == '__main__':
+    main()

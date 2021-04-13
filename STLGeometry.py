@@ -38,13 +38,13 @@ class STLGeometry:
     z_min = None
     z_max = None
 
+
     def __init__(self, stl_filepath):
-        """   initialize STLGeometry using imported data from an .stl file   """
-        if self.VERBOSE : print("Importing STL File:" ,stl_filepath)
+        # TODO test new constructor
+        """Load in geometry from an stl file"""        
         try:
             self.mesh = mesh.Mesh.from_file(stl_filepath)
         except FileNotFoundError:
-            # raise RuntimeError("file not found: ,",stl_filepath)
             print("file not found: ,",stl_filepath) 
         
         self.derive_statistics()
@@ -75,16 +75,7 @@ class STLGeometry:
         """size, triangle count, file name, range"""
         print(f'Geometry Statistics:')
         print(f'\tSize:   \t {self.dimensions[0]:.0f}mm x {self.dimensions[1]:.0f}mm x {self.dimensions[2]:.0f}mm')
-        print(f'\tFaces:  \t {self.faces:,}')
         print(f'\tX Range:\t {self.x_min:.3f}, {self.x_max:.3f}')
         print(f'\tY Range:\t {self.y_min:.3f}, {self.y_max:.3f}')
         print(f'\tZ Range:\t {self.z_min:.3f}, {self.z_max:.3f}')
-
-def main():
-    """import stl file"""
-    geometry = STLGeometry("/home/stephen/projects/slicer/3DBenchy.stl")
-    """display stats"""
-    geometry.print_stats()
-
-if __name__ == '__main__':
-    main()
+        print(f'\tFaces:  \t {self.faces:,}')
