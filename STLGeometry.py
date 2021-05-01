@@ -27,6 +27,7 @@ class STLGeometry:
     """"""
     VERBOSE = True
     mesh = None
+    filepath = None
     """derived stats"""
     dimensions = None
     range = None
@@ -39,13 +40,14 @@ class STLGeometry:
     z_max = None
 
 
-    def __init__(self, stl_filepath):
+    def __init__(self, ifilepath):
+        self.filepath = ifilepath
         # TODO test new constructor
         """Load in geometry from an stl file"""        
         try:
-            self.mesh = mesh.Mesh.from_file(stl_filepath)
+            self.mesh = mesh.Mesh.from_file(self.filepath)
         except FileNotFoundError:
-            print("file not found: ,",stl_filepath) 
+            print("file not found: ,",self.filepath) 
         
         self.derive_statistics()
 
@@ -74,8 +76,9 @@ class STLGeometry:
     def print_stats(self):
         """size, triangle count, file name, range"""
         print(f'Geometry Statistics:')
-        print(f'\tSize:   \t {self.dimensions[0]:.0f}mm x {self.dimensions[1]:.0f}mm x {self.dimensions[2]:.0f}mm')
-        print(f'\tX Range:\t {self.x_min:.3f}, {self.x_max:.3f}')
-        print(f'\tY Range:\t {self.y_min:.3f}, {self.y_max:.3f}')
-        print(f'\tZ Range:\t {self.z_min:.3f}, {self.z_max:.3f}')
-        print(f'\tFaces:  \t {self.faces:,}')
+        print(f'\tFilepath:\t {self.filepath}')
+        print(f'\tSize:    \t {self.dimensions[0]:.0f}mm x {self.dimensions[1]:.0f}mm x {self.dimensions[2]:.0f}mm')
+        print(f'\tX Range: \t {self.x_min:.3f}, {self.x_max:.3f}')
+        print(f'\tY Range: \t {self.y_min:.3f}, {self.y_max:.3f}')
+        print(f'\tZ Range: \t {self.z_min:.3f}, {self.z_max:.3f}')
+        print(f'\tFaces:   \t {self.faces:,}')

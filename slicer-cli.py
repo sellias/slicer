@@ -20,6 +20,14 @@ import sys, os
 from STLGeometry import STLGeometry as STL
 
 def main():
+    print("")
+    # import and validate stl file
+    validateArgs()
+    obj = STL(sys.argv[1])
+
+    obj.print_stats()
+
+def validateArgs():
     """validate input arguments"""
     if len(sys.argv) != 2:
         print('ERROR: please provide target filename')
@@ -27,13 +35,6 @@ def main():
     if not os.path.exists(sys.argv[1]):
         print('ERROR: file not found')
         exit()
-
-    """import the stl geometry"""
-    print('Importing \'', sys.argv[1], '\'')
-    obj = STL(sys.argv[1])
-
-    """print geometry statistics"""
-    obj.print_stats()
 
 if __name__ == '__main__':
     main()
